@@ -2,14 +2,12 @@ package dir
 
 import (
 	"os"
-	"syscall"
 	"time"
 )
 
 // In some cases, umask would affect the folder permissions.
 // We should reset the umask to ensure our permissions.
 func Dir_Create(dirpath string) (error, time.Duration) {
-	syscall.Umask(0) // reset umask
 	t_start := time.Now()
 	err := os.MkdirAll(dirpath, 0777)
 	t_end := time.Now()

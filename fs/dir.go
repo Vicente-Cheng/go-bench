@@ -1,12 +1,11 @@
-package dir
+package fs
 
 import (
 	"os"
 	"time"
 )
 
-// In some cases, umask would affect the folder permissions.
-// We should reset the umask to ensure our permissions.
+//
 func Dir_Create(dirpath string) (error, time.Duration) {
 	t_start := time.Now()
 	err := os.MkdirAll(dirpath, 0777)
@@ -25,6 +24,10 @@ func Dir_Remove(dirpath string) (error, time.Duration) {
 }
 
 //
-func Dir_Traverse(dirpath string) error {
-	return nil
+func Dir_Change(dirpath string) (error, time.Duration) {
+	t_start := time.Now()
+	err := os.Chdir(dirpath)
+	t_end := time.Now()
+	t_dur := t_end.Sub(t_start)
+	return err, t_dur
 }
